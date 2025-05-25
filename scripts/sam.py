@@ -21,6 +21,12 @@ from scripts.dino import dino_model_list, dino_predict_internal, show_boxes, cle
 from scripts.auto import clear_sem_sam_cache, register_auto_sam, semantic_segmentation, sem_sam_garbage_collect, image_layer_internal, categorical_mask_image
 from scripts.process_params import SAMProcessUnit, max_cn_num
 
+import sys
+
+# Gradio expects the module name "sam.py" when generating component IDs.
+# Ensure this alias exists in sys.modules to prevent KeyError during init.
+sys.modules.setdefault("sam.py", sys.modules[__name__])
+
 
 refresh_symbol = '\U0001f504'       # 🔄
 sam_model_cache = OrderedDict()
